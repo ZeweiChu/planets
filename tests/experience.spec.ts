@@ -12,6 +12,9 @@ async function enter(page: Page) {
 }
 
 test('walk, look, visit all landmarks, change language, and return to planets', async ({ page }, info) => {
+  // This full journey took 44.3 s on CI's software renderer; allow 3× the normal
+  // test budget while keeping individual assertions and the other tests tight.
+  test.slow();
   const errors: string[] = [];
   page.on('pageerror', e => errors.push(e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });

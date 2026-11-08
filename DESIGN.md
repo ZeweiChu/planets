@@ -6,6 +6,7 @@ Mars is a quiet field visit: a landscape first, with optional observations. It s
 
 - Dusty ochre ground, mineral-brown rocks, cream text, charcoal translucent controls.
 - Source Serif 4 for place names and headings; IBM Plex Sans for readable interface text; IBM Plex Mono for small field labels and navigation hints. System fonts cover scripts absent from these families.
+- Arabic and Hindi labels use the body font stack instead of monospace fallbacks. Labels and headings retain normal letter spacing to preserve script shaping.
 - Body and observation text is 16px. Small labels may be 10–14px; they supplement accessible control names and do not carry long explanations.
 - The scene fills the viewport. Initial typography sits to one side so the horizon remains visible. Once walking begins, most introductory text disappears.
 - Controls use restrained borders and 3–4px corners. The circular inset map is schematic, with a player arrow and three landmarks. It is not an orbital map or surveyed topography.

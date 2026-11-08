@@ -103,7 +103,9 @@ export class MarsScene {
           vec3 sun=normalize(vec3(-100.,74.,-130.));
           float facing=max(dot(d,sun),0.);
           color+=vec3(.33,.24,.16)*pow(facing,22.);
-          color+=vec3(1.6,1.42,1.13)*smoothstep(.99991,.99997,facing);
+          // About 0.35 degrees across at Mars's mean distance from the Sun.
+          float sunRadius=radians(.175);
+          color+=vec3(1.6,1.42,1.13)*smoothstep(cos(sunRadius+.0004),cos(sunRadius-.0004),facing);
           gl_FragColor=vec4(color,1.);
           #include <tonemapping_fragment>
           #include <colorspace_fragment>
