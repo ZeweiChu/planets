@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#29251f">
+  <meta name="description" content="Take a quiet walk on an imagined Mars. Explore rocks, sand and an open horizon in a small interactive 3D landscape.">
+  <title>Mars — Standing on Other Worlds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/mars/style.css">
+</head>
+<body data-mode="loading">
+  <main id="experience">
+    <canvas id="landscape" tabindex="0" aria-label="Walkable Mars landscape" aria-describedby="instructions"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <header class="topbar">
+      <a id="back" class="back-link" href="../#mars"><span aria-hidden="true">↖</span><span data-copy="back">All planets</span></a>
+      <span class="wordmark" data-copy="worlds">OTHER WORLDS</span>
+      <label class="language"><span class="sr-only" data-copy="language">Language</span><span aria-hidden="true">◎</span><select id="language"></select></label>
+    </header>
+    <section class="welcome" id="welcome" aria-labelledby="welcome-title">
+      <p class="eyebrow" data-copy="chapter">FIELD VISIT / 001</p>
+      <h1 id="welcome-title" data-copy="mars">Mars</h1>
+      <h2 data-copy="title">A little closer.</h2>
+      <p class="intro" data-copy="intro">An open horizon. A world of quiet details. Take a few steps on the red planet.</p>
+      <button class="primary" id="enter" disabled><span id="enter-label" data-copy="loading">Preparing your landing…</span><span aria-hidden="true">↗</span></button>
+      <p class="area"><span class="small-cross" aria-hidden="true">+</span><span data-copy="area">80 × 80 m to explore</span></p>
+    </section>
+    <div class="field-heading" aria-hidden="true"><span class="eyebrow" data-copy="chapter"></span><span class="field-name" data-copy="mars"></span></div>
+    <nav class="tools" aria-label="Mars">
+      <button id="places" class="tool"><span aria-hidden="true">⌖</span><span data-copy="places">Places to discover</span></button>
+      <button id="help" class="tool"><span aria-hidden="true">?</span><span data-copy="help">Controls</span></button>
+      <button id="reset" class="tool compact" data-title="reset"><span aria-hidden="true">↺</span><span class="sr-only" data-copy="reset">Return to start</span></button>
+      <button id="quality" class="tool compact"><span aria-hidden="true">◈</span><span id="quality-label"></span></button>
+    </nav>
+    <button id="nearby" class="nearby" hidden><span class="point-icon" aria-hidden="true">+</span><span><small data-copy="nearby">Look closer</small><strong id="nearby-name"></strong></span><span aria-hidden="true">↗</span></button>
+    <div class="touch-controls" aria-label="Movement">
+      <button data-key="ArrowUp" data-title="forward" class="forward">↑</button>
+      <button data-key="ArrowLeft" data-title="left">↶</button><button data-key="ArrowDown" data-title="backward">↓</button><button data-key="ArrowRight" data-title="right">↷</button>
+    </div>
+    <div id="map" class="field-map" aria-hidden="true">
+      <svg viewBox="0 0 112 112"><defs><clipPath id="map-clip"><circle cx="56" cy="56" r="51"/></clipPath></defs>
+        <circle class="map-ground" cx="56" cy="56" r="53"/><g clip-path="url(#map-clip)" class="map-contours"><path d="M-10 88Q32 10 122 29M-10 99Q28 26 124 39M-9 111Q38 34 125 49M-1 122Q41 49 127 59M-20 52Q33 -12 114 3M-14 64Q30 -3 124 17"/></g>
+        <path class="map-axis" d="M56 4v6m0 92v6M4 56h6m92 0h6"/>
+        <circle class="map-site" cx="42" cy="48" r="2.3"/><circle class="map-site" cx="74" cy="46" r="2.3"/><circle class="map-site" cx="59" cy="26" r="2.3"/>
+        <g id="map-player"><path d="M0 -5L3.5 4L0 2L-3.5 4Z"/></g>
+      </svg><span>80 m</span>
+    </div>
+    <footer class="footer"><button id="about" data-copy="illustration">An imagined place, informed by Mars</button><p id="instructions"></p></footer>
+    <p id="status" class="status" role="status"></p>
+    <section id="fallback" class="fallback" hidden>
+      <p class="eyebrow" data-copy="chapter"></p><h1 data-copy="fallbackTitle"></h1><p data-copy="fallbackText"></p>
+      <figure><img src="../photos/mars-pano360.jpg" alt="Perseverance panorama of Mars" width="2400" height="636"><figcaption>NASA / JPL-Caltech / ASU / MSSS · PIA24264</figcaption></figure>
+      <button class="primary" id="retry" data-copy="retry"></button><div id="fallback-notes"></div>
+    </section>
+    <noscript><section class="no-script"><h1>Mars</h1><p>JavaScript is needed to explore in 3D. Here is a real panorama from Perseverance.</p><img src="../photos/mars-pano360.jpg" alt="Mars panorama, NASA/JPL-Caltech/ASU/MSSS"><p><a href="../#mars">Return to the planets</a></p></section></noscript>
+  </main>
+  <dialog id="panel" aria-labelledby="panel-title"><div class="panel-top"><p class="eyebrow" data-copy="chapter"></p><button id="close" class="close-button" data-title="close">×</button></div><h2 id="panel-title"></h2><div id="panel-content"></div></dialog>
+  <script type="module" src="/src/mars/main.ts"></script>
+</body>
+</html>

@@ -1,2 +1,6 @@
+node_modules/
 _to_delete/
+dist/
+test-results/
+playwright-report/
 .DS_Store
