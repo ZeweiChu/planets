@@ -3,8 +3,8 @@ meta: {name: "Français", html: "fr", dir: "ltr", font: "latin", num: "fr-FR", l
 ui: {
   title: "Debout sur d’autres mondes",
   langLabel: "Langue",
-  stripLabel: "Choisir une planète",
-  scaleNote: "Touchez une planète pour changer. Classées du Soleil vers l’extérieur. Tailles compressées (racine carrée du diamètre) : à l’échelle réelle, Jupiter est environ 11 fois plus large que la Terre.",
+  stripLabel: "Choisir un monde",
+  scaleNote: "Touchez un monde pour changer. Classés du Soleil vers l’extérieur, avec la Lune à côté de la Terre, la planète autour de laquelle elle tourne. Tailles compressées (racine carrée du diamètre) : à l’échelle réelle, Jupiter est environ 11 fois plus large que la Terre.",
   photosOf: "Photos de {name}",
   panoHint: "← Faites glisser pour regarder autour →",
   panoLabel: "Panorama, faites défiler sur les côtés",
@@ -19,6 +19,7 @@ ui: {
   statDensityNote: "kg/m³ (eau : 1000)",
   statDay: "Jour",
   statYear: "Année",
+  statOrbit: "Orbite autour de la Terre",
   moonsOne: "{n} lune",
   moonsOther: "{n} lunes",
   magYes: "champ magnétique global",
@@ -39,9 +40,9 @@ ui: {
   gJump: "Un saut de 50 cm sur Terre devient",
   gWeight: "Votre poids",
   gCloud: "(Au niveau des nuages à 1 bar, en supposant que vous ayez un endroit où vous tenir.)",
-  cmpTitle: "Les huit côte à côte",
-  cmpSub: "Cliquez sur une ligne pour passer à cette planète. Les planètes géantes n’ont pas de sol : leur gravité et leur température sont données au niveau de 1 bar.",
-  colPlanet: "Planète",
+  cmpTitle: "Les huit planètes et la Lune côte à côte",
+  cmpSub: "Cliquez sur une ligne pour passer à ce monde. Les planètes géantes n’ont pas de sol : leur gravité et leur température sont données au niveau de 1 bar.",
+  colPlanet: "Monde",
   colType: "Type",
   colGround: "Sous vos pieds",
   colGases: "Gaz principaux",
@@ -68,7 +69,7 @@ ui: {
   frostAria: "Schéma de la ligne des glaces : planètes rocheuses en deçà, géantes gazeuses et de glace au-delà",
   l2Title: "2. Qui garde son atmosphère ?",
   l2p1: "Les molécules de gaz s’agitent sans cesse : plus le gaz est chaud et la molécule légère, plus elles vont vite. À température égale, les molécules d’hydrogène vont 4,7 fois plus vite que celles de dioxyde de carbone.",
-  l2p2: "Une règle empirique : si la vitesse de libération d’une planète dépasse environ 6 fois la vitesse moyenne d’une molécule, la planète peut retenir ce gaz pendant des milliards d’années. Déplacez le curseur de température pour voir quels gaz chaque planète conserve.",
+  l2p2: "Une règle empirique : si la vitesse de libération d’un monde dépasse environ 6 fois la vitesse moyenne d’une molécule, il peut retenir ce gaz pendant des milliards d’années. Déplacez le curseur de température pour voir quels gaz chaque monde conserve.",
   tempLabel: "Température de la haute atmosphère",
   tempOut: "{t} K (environ {c} °C)",
   escAxis: "Vitesse de libération de la planète (km/s, échelle log.) · lignes colorées = minimum pour garder ce gaz",
@@ -77,7 +78,7 @@ ui: {
   keepSome: "Garde {list}",
   legend: "À {t} K, vitesse de libération nécessaire pour garder chaque gaz : {list} km/s. Un point à droite d’une ligne garde ce gaz.",
   dotTitle: "{name} : vitesse de libération {v} km/s",
-  escAria: "Vitesse de libération de chaque planète comparée à celle nécessaire pour garder différents gaz",
+  escAria: "Vitesse de libération de chaque monde comparée à celle nécessaire pour garder différents gaz",
   l2fine: "La température ici est celle du sommet de l’atmosphère, d’où le gaz s’échappe réellement dans l’espace, et elle est souvent bien plus élevée qu’au sol : la haute atmosphère terrestre peut atteindre environ 1000 K. C’est un modèle simplifié. Le vent solaire et les réactions chimiques emportent aussi de l’air, comme le montre Mars.",
   srcTitle: "Sources",
   sources: [
@@ -85,7 +86,8 @@ ui: {
     "Composition atmosphérique : fiches par planète de la NASA NSSDC, voir l’<a href=\"https://nssdc.gsfc.nasa.gov/planetary/planetfact.html\">index des fiches</a>",
     "Vraies couleurs de Neptune et d’Uranus : <a href=\"https://skyatnightmagazine.com/news/images-uranus-neptune-true-colours\">article sur Irwin et al., 2024</a>",
     "Photos : <a href=\"https://science.nasa.gov/photojournal/\">Photojournal</a> de la NASA, NASA NSSDC (Venera 13), Scientific Visualization Studio de la NASA (La Bille bleue). La source et l’identifiant de chaque photo figurent sous celle-ci. Les images de la NASA sont utilisées selon ses consignes d’utilisation ; le traitement du gros plan de Juno est sous licence CC BY-NC-SA.",
-    "Les matériaux de surface et les explications « pourquoi » résument, en les simplifiant, des résultats publiés par MESSENGER, Venera, Viking, MAVEN, Juno et d’autres missions."
+    "Les matériaux de surface et les explications « pourquoi » résument, en les simplifiant, des résultats publiés par MESSENGER, Venera, Viking, MAVEN, Juno et d’autres missions.",
+    "La Lune : <a href=\"https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html\">Moon Fact Sheet de la NASA (NSSDC)</a>. Les photos de la Lune (Apollo 11, Apollo 8, Artemis II) proviennent de la <a href=\"https://images.nasa.gov/\">NASA Image and Video Library</a>."
   ]
 },
 planets: {
@@ -159,6 +161,31 @@ planets: {
     ],
     stand: "C’est le point de référence pour lequel votre corps est fait : sur ce site, chaque « fois la Terre » compte la Terre pour 1.",
     tableSurface: "Roche + océans"
+  },
+  moon: {
+    name: "Lune", kind: "Satellite de la Terre",
+    tNote: "À l’équateur : environ −178 °C la nuit et jusqu’à +117 °C à midi",
+    pNote: "Environ 3×10⁻¹⁵ bar la nuit, pratiquement le vide",
+    day: "29,5 jours terrestres", dayNote: "D’un lever de Soleil au suivant", year: "27,3 jours",
+    hook: "Le seul autre monde où des humains ont marché : douze astronautes entre 1969 et 1972.",
+    surface: "Roche solide couverte de poussière",
+    groundQ: "Poussière grise et roche, martelées par des milliards d’années d’impacts : de sombres plaines de lave et des hautes terres claires, criblées de cratères.",
+    items: [
+      ["Régolithe", "Poussière fine et roche brisée sur plusieurs mètres d’épaisseur, broyées par les impacts de météorites. Les grains restent anguleux, car ni vent ni eau ne les arrondissent"],
+      ["Basalte", "Les taches sombres, appelées mers (maria en latin), sont d’anciennes plaines de lave, le même type de roche qu’à Hawaï"],
+      ["Anorthosite", "Les hautes terres claires sont une roche pâle riche en feldspath, remontée à la surface d’un ancien océan de roche en fusion"],
+      ["Glace d’eau", "Cachée dans des cratères polaires que le Soleil n’éclaire jamais, parmi les endroits les plus froids mesurés dans le système solaire"]
+    ],
+    airQ: "Presque pas d’air : un souffle d’hélium, de néon, d’hydrogène et d’argon.",
+    airNote: "Tout l’air de la Lune réuni ne pèse qu’environ 25 tonnes, à peu près quatre éléphants répartis sur un monde entier. Une bonne partie vient du vent solaire, et l’argon s’échappe lentement des roches.",
+    why: [
+      ["Pourquoi n’y a-t-il pas d’air ?", "La vitesse de libération de la Lune n’est que de 2,4 km/s, et son sol ensoleillé devient plus chaud que l’eau bouillante : les molécules de gaz s’échappent facilement. L’air qu’elle a pu avoir s’est perdu dans l’espace depuis longtemps."],
+      ["Pourquoi est-elle moins dense que la Terre ?", "Elle n’a qu’un petit noyau de fer. L’explication la plus admise : il y a environ 4,5 milliards d’années, un corps de la taille de Mars a percuté la jeune Terre, et la Lune s’est formée à partir des débris, issus surtout des couches rocheuses externes. Mercure est le cas inverse : petite, avec un noyau de fer démesuré."],
+      ["Pourquoi voit-on toujours la même face ?", "La gravité terrestre a légèrement étiré la jeune Lune et, par frottement, a ralenti sa rotation jusqu’à ce qu’un tour sur elle-même dure exactement autant qu’une orbite. C’est la rotation synchrone, due aux marées. Personne n’avait vu la face cachée avant qu’une sonde la photographie en 1959."]
+    ],
+    stand: "La gravité vaut un sixième de celle de la Terre : un saut de 50 cm devient un saut d’environ 3 m. Le ciel est noir même à midi et, depuis la face visible, la Terre reste presque immobile dans le ciel, sans jamais se lever ni se coucher, et paraît environ 3,7 fois plus large que la pleine Lune vue de chez nous.",
+    tableSurface: "Roche et poussière",
+    tableGases: "Quasi-vide (hélium, néon, argon)"
   },
   mars: {
     name: "Mars", kind: "Planète rocheuse",
@@ -285,6 +312,7 @@ fun: {
   mercury: "Une journée sur Mercure, d’un lever de Soleil au suivant, dure 176 jours terrestres, deux fois son année de 88 jours. Attendre là-bas du lever au coucher du Soleil prend une année entière.",
   venus: "Sur Vénus, le Soleil se lève à l’ouest. Elle tourne dans le sens inverse de la Terre, et si lentement qu’un tour prend 243 jours, plus que ses 225 jours de voyage autour du Soleil.",
   earth: "La Terre est la plus dense des huit planètes : 5,5 tonnes par mètre cube en moyenne. Presque tout l’oxygène que vous respirez a été fabriqué, peu à peu, par la vie au fil de milliards d’années.",
+  moon: "Les empreintes d’Apollo sont probablement toujours là. Sans vent ni pluie, seule une fine bruine de minuscules météorites les efface peu à peu, ce qui pourrait prendre des millions d’années.",
   mars: "Sur Mars, les couchers de Soleil sont bleus, alors que le ciel de jour est brun jaunâtre. Les deux viennent de la même chose : la fine poussière qui flotte dans l’air.",
   jupiter: "La Grande Tache rouge de Jupiter est une seule tempête plus large que la Terre entière. On l’observe au télescope depuis au moins 150 ans, et elle ne s’est toujours pas calmée.",
   saturn: "Les anneaux de Saturne s’étendent sur plus de 200 000 km, mais n’ont pour la plupart qu’une dizaine de mètres d’épaisseur. À cette échelle, ce serait une feuille de papier d’imprimante large de deux ou trois kilomètres.",
@@ -301,6 +329,11 @@ photos: {
   ],
   earth: [
     {t: "« La Bille bleue », 7 décembre 1972", d: "Les astronautes d’Apollo 17 ont photographié la Terre en route vers la Lune : l’Afrique et la péninsule Arabique en haut, l’Antarctique en blanc en bas.", b: "Vraies couleurs"}
+  ],
+  moon: [
+    {t: "Une empreinte de botte sur la Lune, 20 juillet 1969", d: "Photographiée pendant la marche lunaire d’Apollo 11, dans la mer de la Tranquillité. Les grains de poussière, anguleux, s’emboîtent et gardent une empreinte nette. Sans vent ni eau pour l’estomper, une telle empreinte peut rester intacte des millions d’années.", b: "Photo de surface"},
+    {t: "« Lever de Terre », 24 décembre 1968", d: "L’équipage d’Apollo 8, premiers humains à tourner autour de la Lune, a photographié la Terre se levant au-dessus de l’horizon lunaire. Depuis le sol de la face visible, la Terre ne se lève pas ainsi : elle reste presque fixe dans le ciel. Ce spectacle ne se voit que depuis l’orbite.", b: "Depuis l’orbite lunaire"},
+    {t: "La Lune vue d’Orion, 6 avril 2026", d: "Prise pendant le vol d’Artemis II autour de la Lune. Les sombres plaines de lave en haut appartiennent à la face visible depuis la Terre. Le bassin à anneaux en dessous est Orientale, large de près de 1 000 km, et tout ce qui se trouve plus bas est la face cachée, qui n’est jamais tournée vers la Terre.", b: "Depuis le vaisseau Orion"}
   ],
   mars: [
     {t: "Le premier panorama à 360° de Perseverance, février 2021", d: "Pris au fond du cratère Jezero et assemblé à partir de 142 images. Faites glisser pour faire le tour complet : la crête lointaine est le bord du cratère, et au premier plan se trouve le pont du rover.", b: "Photo de surface"},

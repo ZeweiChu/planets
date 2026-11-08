@@ -15,12 +15,13 @@ import { messages } from "../mars/messages";
 const I18N = window.I18N || {};
 const LANG_ORDER = ['zh-Hans','zh-Hant','en','es','fr','de','ja','ko','hi','ar'];
 const LANGS = LANG_ORDER.filter(c => I18N[c]);
-// Right-to-left languages: keep "number °C" together as one left-to-right unit,
-// otherwise the bidi algorithm splits it into "C° 727".
+// Right-to-left languages: keep "number °C" and powers of ten such as "3×10⁻¹⁵ bar" together as one
+// left-to-right unit, otherwise the bidi algorithm splits them into "C° 727" or "10 ¹⁵⁻".
 (function isolateDegrees(){
   const re = /((?:\{\w+\}|[−-]?\d[\d.,]*(?:[–-][−-]?\d[\d.,]*)?)\s)?°C/g;
+  const sci = /\d[\d.,]*×10[⁻⁺]?[⁰¹²³⁴⁵⁶⁷⁸⁹]+(?:\s(?:bar|K))?/g;
   const walk = o => { for (const k in o) {
-    if (typeof o[k] === 'string') o[k] = o[k].replace(re, m => '⁦' + m + '⁩');
+    if (typeof o[k] === 'string') o[k] = o[k].replace(re, m => '⁦' + m + '⁩').replace(sci, m => '⁦' + m + '⁩');
     else if (o[k] && typeof o[k] === 'object') walk(o[k]);
   } };
   LANGS.forEach(c => { if (I18N[c].meta.dir === 'rtl') { walk(I18N[c].ui); walk(I18N[c].planets); walk(I18N[c].photos); walk(I18N[c].fun); } });
@@ -62,7 +63,7 @@ const ATOMS = {H:['#e8edf5',4.2],C:['#5a606c',6.2],N:['#5c86ef',6.2],O:['#ec5a44
 const MOLS = {
   H2:[['H',-4.5,0],['H',4.5,0]], N2:[['N',-5.6,0],['N',5.6,0]], O2:[['O',-5.6,0],['O',5.6,0]], CO:[['C',-5.6,0],['O',5.6,0]],
   CO2:[['C',0,0],['O',-11.5,0],['O',11.5,0]], CH4:[['C',0,0],['H',-8,-6],['H',8,-6],['H',-8,6],['H',8,6]],
-  He:[['He',0,0]], Ar:[['Ar',0,0]], Na:[['Na',0,0]], Mg:[['Mg',0,0]], O:[['O',0,0]], H:[['H',0,0]], K:[['K',0,0]], Ca:[['Ca',0,0]]
+  He:[['He',0,0]], Ne:[['Ne',0,0]], Ar:[['Ar',0,0]], Na:[['Na',0,0]], Mg:[['Mg',0,0]], O:[['O',0,0]], H:[['H',0,0]], K:[['K',0,0]], Ca:[['Ca',0,0]]
 };
 const fmtF = f => `<bdi class="f">${f.replace(/(\d+)/g,'<sub>$1</sub>')}</bdi>`;
 const SUBS = '₀₁₂₃₄₅₆₇₈₉';
@@ -98,6 +99,9 @@ function planetSVG(p, d){
       break;
     case 'earth':
       f = `<g fill="#5b8b4f"><ellipse cx="32" cy="40" rx="13" ry="21" transform="rotate(22 32 40)"/><ellipse cx="64" cy="64" rx="11" ry="16" transform="rotate(-18 64 64)"/><ellipse cx="72" cy="30" rx="9" ry="6"/></g><g fill="#c9b27c" opacity=".7"><ellipse cx="66" cy="58" rx="5" ry="4"/></g><g fill="#fff" opacity=".6"><ellipse cx="44" cy="22" rx="22" ry="3.5" transform="rotate(-12 44 22)"/><ellipse cx="58" cy="46" rx="20" ry="3" transform="rotate(8 58 46)"/><ellipse cx="34" cy="74" rx="18" ry="3.2" transform="rotate(-6 34 74)"/><ellipse cx="50" cy="98" rx="30" ry="8"/></g>`;
+      break;
+    case 'moon':
+      f = `<g fill="#5f5d59" opacity=".55"><ellipse cx="38" cy="34" rx="15" ry="11"/><ellipse cx="58" cy="28" rx="10" ry="8"/><ellipse cx="30" cy="56" rx="11" ry="9"/><ellipse cx="62" cy="48" rx="8" ry="6"/></g><g fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.6"><circle cx="58" cy="76" r="5"/><circle cx="76" cy="60" r="3"/><circle cx="44" cy="84" r="2.5"/></g>`;
       break;
     case 'mars':
       f = `<g fill="#7f3a22" opacity=".45"><ellipse cx="40" cy="56" rx="20" ry="8" transform="rotate(-10 40 56)"/><ellipse cx="66" cy="40" rx="11" ry="6"/><ellipse cx="24" cy="38" rx="7" ry="4"/></g><ellipse cx="50" cy="3" rx="20" ry="8" fill="#fff" opacity=".85"/><ellipse cx="50" cy="99" rx="14" ry="5" fill="#fff" opacity=".6"/>`;
@@ -135,7 +139,7 @@ let temp = 1000;
 let photoIdx = 0;
 const byId = id => PLANETS.find(p => p.id === id);
 const ratio = p => p.g / 9.8;
-const pressStr = p => p.id === 'mercury' ? '≈ 0' : p.p === null ? '—' : num(p.p, p.pd);
+const pressStr = p => p.p === 0 ? '≈ 0' : p.p === null ? '—' : num(p.p, p.pd);
 
 /* ---------- static text ---------- */
 function fitText(el, max){
@@ -208,7 +212,7 @@ const strip = document.getElementById('strip');
 PLANETS.forEach(p => {
   const d = Math.round(18 + 64*Math.sqrt(p.D/142984));
   const b = document.createElement('button');
-  b.className = 'pbtn'; b.type = 'button'; b.dataset.id = p.id; b.setAttribute('aria-pressed','false');
+  b.className = p.parent ? 'pbtn sat' : 'pbtn'; b.type = 'button'; b.dataset.id = p.id; b.setAttribute('aria-pressed','false');
   b.innerHTML = planetSVG(p, d) + `<span class="pname"></span>`;
   b.addEventListener('click', () => go(p.id));
   strip.appendChild(b);
@@ -276,7 +280,7 @@ function gravHTML(p){
 function airHTML(p){
   const u = U(), t = tp(p.id), G = L().gas;
   if(!p.gases){
-    const chips = p.atoms.map(a => `<li class="gas">${molSVG(a)}<span class="f">${a}<span class="n">${G[a]}</span></span></li>`).join('');
+    const chips = p.atoms.map(a => `<li class="gas">${molSVG(a)}<span class="f">${a.replace(/(\d+)/g,'<sub>$1</sub>')}<span class="n">${G[a]}</span></span></li>`).join('');
     return `<p class="q">${t.airQ}</p><p class="note">${t.airNote}</p><ul class="gases" style="margin-top:12px">${chips}</ul>`;
   }
   const sum = p.gases.reduce((s,[,v]) => s + v, 0);
@@ -309,7 +313,8 @@ function render(keepPhoto){
     const pos = selBtn.offsetLeft - (strip.clientWidth - selBtn.offsetWidth)/2;
     strip.scrollLeft = m.dir === 'rtl' ? -(strip.scrollWidth - strip.clientWidth - pos) : pos;
   }
-  const moons = fmt(p.moons === 1 ? u.moonsOne : u.moonsOther, {n: p.moons}) + ' · ' + (p.mag ? u.magYes : u.magNo);
+  const mag = p.mag ? u.magYes : u.magNo;
+  const moons = p.parent ? mag : fmt(p.moons === 1 ? u.moonsOne : u.moonsOther, {n: p.moons}) + ' · ' + mag;
   document.getElementById('detail').innerHTML = `
     <section class="stage" id="stage" aria-label="${fmt(u.photosOf, {name: t.name})}"></section>
     <aside class="portrait" aria-label="${fmt(u.glance, {name: t.name})}">
@@ -323,7 +328,7 @@ function render(keepPhoto){
         <div class="stat"><span>${u.statPressure}</span><b>${pressStr(p)}${p.p === null ? '' : ' bar'}</b><em>${t.pNote}</em></div>
         <div class="stat"><span>${u.statDensity}</span><b>${num(p.density)}</b><em>${u.statDensityNote}</em></div>
         <div class="stat"><span>${u.statDay}</span><b class="word">${t.day}</b><em>${t.dayNote || '&nbsp;'}</em></div>
-        <div class="stat"><span>${u.statYear}</span><b class="word">${t.year}</b><em>${moons}</em></div>
+        <div class="stat"><span>${p.parent ? u.statOrbit : u.statYear}</span><b class="word">${t.year}</b><em>${moons}</em></div>
       </div>
     </aside>
     <div class="cards">
@@ -350,7 +355,7 @@ function render(keepPhoto){
 /* ---------- comparison table ---------- */
 function buildTable(){
   const u = U();
-  const main = p => p.gases ? p.gases.filter(([,v]) => v >= 1).map(([k,v]) => `${fmtF(k)} <bdi>${v >= 10 ? num(Math.round(v)) : num(v,decs(v))}%</bdi>`).join(' · ') : u.nearVacuum;
+  const main = p => p.gases ? p.gases.filter(([,v]) => v >= 1).map(([k,v]) => `${fmtF(k)} <bdi>${v >= 10 ? num(Math.round(v)) : num(v,decs(v))}%</bdi>`).join(' · ') : (tp(p.id).tableGases || u.nearVacuum);
   const t = document.getElementById('cmp');
   t.innerHTML = `<thead><tr><th>${u.colPlanet}</th><th>${u.colType}</th><th>${u.colGround}</th><th>${u.colGases}</th><th class="num">${u.colGravity}</th><th class="num">${u.colTemp}</th><th class="num">${u.colPressure}</th><th class="num">${u.colEscape}</th></tr></thead>
   <tbody>${PLANETS.map(p => `<tr data-id="${p.id}" tabindex="0"><td><span class="tname">${planetSVG(p, p.id==='saturn'?20:22)}${tp(p.id).name}</span></td><td>${tp(p.id).kind}</td><td>${tp(p.id).tableSurface}</td><td>${main(p)}</td>
@@ -371,8 +376,10 @@ function drawEscape(){
   const svg = document.getElementById('esc');
   const X = v => 120 + Math.log10(v)/2 * 380;
   const rowY = i => 78 + i*28;
+  const last = rowY(PLANETS.length - 1);
+  svg.setAttribute('viewBox', `0 0 760 ${last + 82}`);
   let s = '';
-  s += `<g stroke="#26324f">${[1,2,5,10,20,50,100].map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="64" y2="296"/>`).join('')}</g>`;
+  s += `<g stroke="#26324f">${[1,2,5,10,20,50,100].map(v => `<line x1="${X(v)}" x2="${X(v)}" y1="64" y2="${last + 22}"/>`).join('')}</g>`;
   PLANETS.forEach((p,i) => {
     const y = rowY(i);
     if(p.id === current) s += `<rect x="2" y="${y-13}" width="756" height="26" rx="6" fill="${p.accent}" fill-opacity=".12"/>`;
@@ -382,7 +389,7 @@ function drawEscape(){
   });
   KEEP.forEach((g,j) => {
     const x = X(need(g, temp));
-    s += `<line x1="${x}" x2="${x}" y1="${j%2 ? 48 : 30}" y2="296" stroke="${g.c}" stroke-width="1.6" stroke-opacity=".9"/>`;
+    s += `<line x1="${x}" x2="${x}" y1="${j%2 ? 48 : 30}" y2="${last + 22}" stroke="${g.c}" stroke-width="1.6" stroke-opacity=".9"/>`;
     s += `<text x="${x}" y="${j%2 ? 42 : 24}" font-size="12.5" font-weight="700" fill="${g.c}" text-anchor="middle">${uniF(g.k)}</text>`;
   });
   PLANETS.forEach((p,i) => {
@@ -392,8 +399,8 @@ function drawEscape(){
     const txt = kept.length === KEEP.length ? u.keepAll : kept.length === 0 ? u.keepNone : fmt(u.keepSome, {list: kept.join(' · ')});
     s += `<text class="vd" x="516" y="${y+4.5}" font-size="13" fill="${kept.length ? '#ece6d9' : '#9aa4bb'}">${txt}</text>`;
   });
-  s += `<g font-size="11.5" fill="#9aa4bb" text-anchor="middle" font-family="IBM Plex Mono, monospace">${[1,2,5,10,20,50,100].map(v => `<text x="${X(v)}" y="314">${v}</text>`).join('')}</g>`;
-  s += `<text class="ax" x="310" y="338" font-size="12" fill="#9aa4bb" text-anchor="middle">${u.escAxis}</text>`;
+  s += `<g font-size="11.5" fill="#9aa4bb" text-anchor="middle" font-family="IBM Plex Mono, monospace">${[1,2,5,10,20,50,100].map(v => `<text x="${X(v)}" y="${last + 40}">${v}</text>`).join('')}</g>`;
+  s += `<text class="ax" x="310" y="${last + 64}" font-size="12" fill="#9aa4bb" text-anchor="middle">${u.escAxis}</text>`;
   svg.innerHTML = s;
   svg.querySelectorAll('text.nm').forEach(t => fitText(t, 66));
   svg.querySelectorAll('text.vd').forEach(t => fitText(t, 236));

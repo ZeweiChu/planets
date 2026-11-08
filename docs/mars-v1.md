@@ -42,7 +42,7 @@ The generated environment is an illustration, not a photogrammetric reconstructi
 
 ## Validation
 
-Unit tests check movement limits, collision tunneling/sliding, height continuity, safe landmark approaches, locale matching and translation completeness. Playwright exercises the production bundle on desktop Chrome and a touch-device viewport, including the original eight planets in all ten languages. Browser coverage includes direct routes/refresh, controls, each landmark, locale changes without camera resets, returning home, reduced motion, quality switching, unavailable WebGL and context loss.
+Unit tests check movement limits, collision tunneling/sliding, height continuity, safe landmark approaches, locale matching and translation completeness. Playwright exercises the production bundle on desktop Chrome and a touch-device viewport, including the eight planets and the Moon in all ten languages. Browser coverage includes direct routes/refresh, controls, each landmark, locale changes without camera resets, returning home, reduced motion, quality switching, unavailable WebGL and context loss.
 
 Visual checks cover desktop, phone portrait, Arabic layout, terrain close-ups and fallback. Phone emulation is not a measurement of physical-phone frame rate. Native Safari/iOS and low-end GPU performance should be checked on devices before claiming universal support. Vite reports a size warning for the isolated Three.js chunk (about 133 KB gzip); it does not load on the overview.
 

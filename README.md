@@ -1,9 +1,9 @@
 # 站在别的星球上 (Standing on Other Worlds)
 
-A weekend science project: an interactive site about the surfaces, atmospheres and gravity of the eight planets, with real spacecraft photos.
+A weekend science project: an interactive site about the surfaces, atmospheres and gravity of the eight planets and the Moon, with real spacecraft photos.
 
-- Planet data: NASA NSSDC Planetary Fact Sheets
-- Photos: NASA/JPL Photojournal, NASA NSSDC (Venera 13), NASA SVS (Blue Marble); each photo's credit and ID is shown on the page
+- Planet and Moon data: NASA NSSDC Planetary and Moon Fact Sheets
+- Photos: NASA/JPL Photojournal, NASA NSSDC (Venera 13), NASA SVS (Blue Marble), NASA Image and Video Library (Apollo 11, Apollo 8, Artemis II Moon photos); each photo's credit and ID is shown on the page
 
 The Mars field visit adds a small, walkable 3D environment with rocks, wind-shaped sand, three observations, and keyboard/touch controls. Both experiences support the existing ten languages.
 
