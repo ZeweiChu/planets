@@ -8,7 +8,7 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:4173/planets/',
     trace: 'retain-on-failure', screenshot: 'only-on-failure',
-    launchOptions: { args: ['--enable-webgl', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] },
+    launchOptions: { args: ['--enable-webgl', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', ...(process.env.SOFTWARE_GL ? ['--use-angle=swiftshader'] : [])] },
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], channel: process.env.CI || process.env.PLAYWRIGHT_BUNDLED ? undefined : 'chrome', viewport: { width: 1440, height: 1000 } } },

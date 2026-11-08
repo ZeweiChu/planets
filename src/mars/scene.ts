@@ -27,6 +27,7 @@ export class MarsScene {
   private previous = 0;
   private lastReport = 0;
   private frame = 0;
+  private needsRender = true;
   private quality: Quality;
   private reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -39,6 +40,9 @@ export class MarsScene {
       this.renderer.toneMappingExposure = .95;
       this.renderer.shadowMap.enabled = true;
       this.renderer.shadowMap.type = THREE.PCFShadowMap;
+      // Lights and terrain are static: cache shadows instead of redrawing them on every step.
+      this.renderer.shadowMap.autoUpdate = false;
+      this.renderer.shadowMap.needsUpdate = true;
       this.scene.fog = new THREE.FogExp2('#b89c80', .0045);
       this.camera.rotation.order = 'YXZ';
       this.buildWorld();
@@ -47,6 +51,7 @@ export class MarsScene {
       this.resize();
       this.setCamera();
       this.renderer.render(this.scene, this.camera);
+      this.needsRender = false;
       this.frame = requestAnimationFrame(this.tick);
     } catch (error) {
       this.dispose();
@@ -348,6 +353,7 @@ export class MarsScene {
     if (!hit || Math.hypot(hit.point.x - this.position.x, hit.point.z - this.position.z) > 25) return;
     const target = { x: hit.point.x, z: hit.point.z };
     if (!canStand(target, this.obstacles)) return;
+    this.needsRender = true;
     if (this.reducedMotion) {
       this.position = target;
     } else this.target = target;
@@ -363,6 +369,7 @@ export class MarsScene {
     this.quality = quality;
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'high' ? 1.6 : 1));
     this.sun.castShadow = quality === 'high';
+    this.renderer.shadowMap.needsUpdate = true;
     this.resize();
   }
   visit(index: number) {
@@ -379,9 +386,14 @@ export class MarsScene {
     this.renderer.setSize(width, height, false);
     this.camera.aspect = width / Math.max(1, height);
     this.camera.updateProjectionMatrix();
+    this.needsRender = true;
   }
   private setCamera() {
-    this.camera.position.set(this.position.x, heightAt(this.position.x, this.position.z) + EYE_HEIGHT, this.position.z);
+    const y = heightAt(this.position.x, this.position.z) + EYE_HEIGHT;
+    if (this.camera.position.x !== this.position.x || this.camera.position.y !== y ||
+        this.camera.position.z !== this.position.z || this.camera.rotation.x !== this.pitch ||
+        this.camera.rotation.y !== this.yaw) this.needsRender = true;
+    this.camera.position.set(this.position.x, y, this.position.z);
     this.camera.rotation.set(this.pitch, this.yaw, 0);
   }
 
@@ -408,10 +420,14 @@ export class MarsScene {
         this.position = next;
       }
     }
+    if (this.targetRing.visible !== !!this.target) this.needsRender = true;
     this.targetRing.visible = !!this.target;
     if (this.target) this.targetRing.position.set(this.target.x, heightAt(this.target.x, this.target.z) + .06, this.target.z);
     this.setCamera();
-    this.renderer.render(this.scene, this.camera);
+    if (this.needsRender) {
+      this.renderer.render(this.scene, this.camera);
+      this.needsRender = false;
+    }
     if (time - this.lastReport > 100) {
       this.lastReport = time;
       const nearest = SITES.findIndex(site => Math.hypot(this.position.x - site.x, this.position.z - site.z) < site.radius);

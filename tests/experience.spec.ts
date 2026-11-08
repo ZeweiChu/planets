@@ -22,10 +22,12 @@ test('walk, look, visit all landmarks, change language, and return to planets', 
     const box = (await button.boundingBox())!;
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
     await page.mouse.down();
-    await page.waitForTimeout(800);
+    await expect.poll(async () => (await position(page)).z).toBeLessThan(start.z - .3);
     await page.mouse.up();
   } else {
-    await page.keyboard.down('w'); await page.waitForTimeout(800); await page.keyboard.up('w');
+    await page.keyboard.down('w');
+    await expect.poll(async () => (await position(page)).z).toBeLessThan(start.z - .3);
+    await page.keyboard.up('w');
   }
   await expect.poll(async () => (await position(page)).z).toBeLessThan(start.z - .3);
   const viewport = page.viewportSize()!;
@@ -146,4 +148,27 @@ test('nearby ground moves the visitor and reduced motion uses an immediate step'
   await page.locator('#quality').click();
   await expect(page.locator('#quality')).toHaveAttribute('aria-pressed', info.project.name === 'mobile' ? 'true' : 'false');
   expect(await position(page)).toEqual(after);
+});
+
+test('idle scenes stop GPU draws and walking redraws the scene', async ({ page }) => {
+  await page.addInitScript(() => {
+    let draws = 0;
+    Object.defineProperty(window, '__marsDraws', { get: () => draws });
+    const original = WebGL2RenderingContext.prototype.drawElements;
+    WebGL2RenderingContext.prototype.drawElements = function (this: WebGL2RenderingContext, ...args: Parameters<typeof original>) {
+      draws++;
+      original.apply(this, args);
+    };
+  });
+  const drawCount = () => page.evaluate(() => (window as unknown as { __marsDraws: number }).__marsDraws);
+  await enter(page);
+  await page.waitForTimeout(300);
+  const idle = await drawCount();
+  expect(idle).toBeGreaterThan(0);
+  await page.waitForTimeout(300);
+  expect(await drawCount()).toBe(idle);
+  await page.locator('#landscape').focus();
+  await page.keyboard.down('w');
+  await expect.poll(drawCount).toBeGreaterThan(idle);
+  await page.keyboard.up('w');
 });

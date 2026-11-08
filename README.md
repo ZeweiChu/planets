@@ -37,7 +37,7 @@ bun --bun playwright install chromium
 PLAYWRIGHT_BUNDLED=1 bun run test:e2e
 ```
 
-Playwright checks the production build on port 4173 in desktop and touch-device emulation. It covers walking, look-around, landmark visits, language persistence, all 80 planet/language combinations, reduced motion, and WebGL fallback/context loss. Physical-phone performance and native Safari are separate manual checks.
+Playwright checks the production build on port 4173 in desktop and touch-device emulation. It covers walking, look-around, landmark visits, language persistence, all 80 planet/language combinations, reduced motion, and WebGL fallback/context loss. Physical-phone performance and native Safari are separate manual checks. To reproduce software rendering used by GPU-less machines, run `SOFTWARE_GL=1 bun run test:e2e`. The suite also checks that idle scenes stop issuing GPU draw calls.
 
 ## GitHub Pages deployment
 
