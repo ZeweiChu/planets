@@ -3,8 +3,8 @@ meta: {name: "Español", html: "es", dir: "ltr", font: "latin", num: "es-ES", la
 ui: {
   title: "De pie sobre otros mundos",
   langLabel: "Idioma",
-  stripLabel: "Elige un planeta",
-  scaleNote: "Toca cualquier planeta para cambiar. Ordenados desde el Sol hacia fuera. Los tamaños están comprimidos (raíz cuadrada del diámetro): a escala real, Júpiter es unas 11 veces más ancho que la Tierra.",
+  stripLabel: "Elige un mundo",
+  scaleNote: "Toca cualquier mundo para cambiar. Ordenados desde el Sol hacia fuera, con la Luna junto a la Tierra, el planeta al que orbita. Los tamaños están comprimidos (raíz cuadrada del diámetro): a escala real, Júpiter es unas 11 veces más ancho que la Tierra.",
   photosOf: "Fotos de {name}",
   panoHint: "← Arrastra para mirar alrededor →",
   panoLabel: "Panorámica, desplázate hacia los lados",
@@ -19,6 +19,7 @@ ui: {
   statDensityNote: "kg/m³ (el agua: 1000)",
   statDay: "Día",
   statYear: "Año",
+  statOrbit: "Órbita alrededor de la Tierra",
   moonsOne: "{n} luna",
   moonsOther: "{n} lunas",
   magYes: "campo magnético global",
@@ -39,9 +40,9 @@ ui: {
   gJump: "Un salto de 50 cm en la Tierra se convierte en",
   gWeight: "Tu peso",
   gCloud: "(A la altura de las nubes de 1 bar, suponiendo que tuvieras dónde pisar.)",
-  cmpTitle: "Los ocho, lado a lado",
-  cmpSub: "Haz clic en una fila para cambiar a ese planeta. Los planetas gigantes no tienen suelo, así que su gravedad y temperatura se dan al nivel de 1 bar.",
-  colPlanet: "Planeta",
+  cmpTitle: "Los ocho planetas y la Luna, lado a lado",
+  cmpSub: "Haz clic en una fila para cambiar a ese mundo. Los planetas gigantes no tienen suelo, así que su gravedad y temperatura se dan al nivel de 1 bar.",
+  colPlanet: "Mundo",
   colType: "Tipo",
   colGround: "Bajo tus pies",
   colGases: "Gases principales",
@@ -68,7 +69,7 @@ ui: {
   frostAria: "Esquema de la línea de hielo: planetas rocosos dentro, gigantes gaseosos y helados fuera",
   l2Title: "2. ¿Quién conserva su atmósfera?",
   l2p1: "Las moléculas de gas se mueven sin parar: cuanto más caliente el gas y más ligera la molécula, más rápido van. A la misma temperatura, las moléculas de hidrógeno se mueven 4,7 veces más rápido que las de dióxido de carbono.",
-  l2p2: "Una regla práctica: si la velocidad de escape de un planeta supera unas 6 veces la velocidad media de una molécula, el planeta puede retener ese gas durante miles de millones de años. Mueve la temperatura para ver qué gases conserva cada planeta.",
+  l2p2: "Una regla práctica: si la velocidad de escape de un mundo supera unas 6 veces la velocidad media de una molécula, puede retener ese gas durante miles de millones de años. Mueve la temperatura para ver qué gases conserva cada mundo.",
   tempLabel: "Temperatura de la alta atmósfera",
   tempOut: "{t} K (unos {c} °C)",
   escAxis: "Velocidad de escape del planeta (km/s, escala logarítmica) · líneas de color = mínimo para retener ese gas",
@@ -77,7 +78,7 @@ ui: {
   keepSome: "Retiene {list}",
   legend: "A {t} K, velocidad de escape necesaria para retener cada gas: {list} km/s. Un punto a la derecha de una línea retiene ese gas.",
   dotTitle: "{name}: velocidad de escape {v} km/s",
-  escAria: "Velocidad de escape de cada planeta comparada con la necesaria para retener distintos gases",
+  escAria: "Velocidad de escape de cada mundo comparada con la necesaria para retener distintos gases",
   l2fine: "La temperatura aquí es la de lo más alto de la atmósfera, desde donde el gas escapa al espacio, y suele ser mucho mayor que en el suelo: la alta atmósfera terrestre puede llegar a unos 1000 K. Es un modelo simplificado. El viento solar y las reacciones químicas también se llevan aire, como muestra Marte.",
   srcTitle: "Fuentes",
   sources: [
@@ -85,7 +86,8 @@ ui: {
     "Composición atmosférica: fichas de cada planeta de la NASA NSSDC; véase el <a href=\"https://nssdc.gsfc.nasa.gov/planetary/planetfact.html\">índice de fichas</a>",
     "Colores reales de Neptuno y Urano: <a href=\"https://skyatnightmagazine.com/news/images-uranus-neptune-true-colours\">reportaje sobre Irwin et al., 2024</a>",
     "Fotos: <a href=\"https://science.nasa.gov/photojournal/\">Photojournal</a> de la NASA, NASA NSSDC (Venera 13), Scientific Visualization Studio de la NASA (La canica azul). Bajo cada foto figuran su fuente e identificador. Las imágenes de la NASA se usan según sus directrices de uso; el procesado del primer plano de Juno tiene licencia CC BY-NC-SA.",
-    "Los materiales de superficie y las explicaciones de “por qué” resumen, de forma simplificada, resultados publicados de MESSENGER, Venera, Viking, MAVEN, Juno y otras misiones."
+    "Los materiales de superficie y las explicaciones de “por qué” resumen, de forma simplificada, resultados publicados de MESSENGER, Venera, Viking, MAVEN, Juno y otras misiones.",
+    "La Luna: <a href=\"https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html\">Moon Fact Sheet de la NASA (NSSDC)</a>. Las fotos de la Luna (Apolo 11, Apolo 8, Artemis II) proceden de la <a href=\"https://images.nasa.gov/\">NASA Image and Video Library</a>."
   ]
 },
 planets: {
@@ -159,6 +161,31 @@ planets: {
     ],
     stand: "Este es el punto de referencia para el que está hecho tu cuerpo: todos los “veces la Tierra” de este sitio toman la Tierra como 1.",
     tableSurface: "Roca + océanos"
+  },
+  moon: {
+    name: "Luna", kind: "Satélite de la Tierra",
+    tNote: "En el ecuador: unos −178 °C de noche y hasta +117 °C a mediodía",
+    pNote: "Unos 3×10⁻¹⁵ bar de noche, prácticamente vacío",
+    day: "29,5 días terrestres", dayNote: "De un amanecer al siguiente", year: "27,3 días",
+    hook: "El único otro mundo que han pisado personas: doce astronautas entre 1969 y 1972.",
+    surface: "Roca sólida cubierta de polvo",
+    groundQ: "Polvo gris y roca, golpeados por miles de millones de años de impactos: oscuras llanuras de lava y tierras altas claras llenas de cráteres.",
+    items: [
+      ["Regolito", "Polvo fino y roca rota de varios metros de espesor, triturados por impactos de meteoritos. Los granos conservan bordes afilados porque no hay viento ni agua que los redondee"],
+      ["Basalto", "Las manchas oscuras, llamadas mares (maria, en latín), son antiguas llanuras de lava, el mismo tipo de roca que la de Hawái"],
+      ["Anortosita", "Las tierras altas claras son una roca pálida, rica en feldespato, que flotó en la superficie de un antiguo océano de roca fundida"],
+      ["Hielo de agua", "Escondido en cráteres polares que nunca ven la luz del Sol, algunos de los lugares más fríos medidos en el sistema solar"]
+    ],
+    airQ: "Casi sin aire: un susurro de helio, neón, hidrógeno y argón.",
+    airNote: "Todo el aire de la Luna junto pesa solo unas 25 toneladas, más o menos cuatro elefantes repartidos por todo un mundo. Buena parte llega con el viento solar, y el argón se filtra poco a poco desde las rocas.",
+    why: [
+      ["¿Por qué no tiene aire?", "La velocidad de escape de la Luna es de solo 2,4 km/s y su suelo iluminado se calienta más que el agua hirviendo, así que las moléculas de gas escapan con facilidad. El aire que pudiera tener se perdió en el espacio hace mucho."],
+      ["¿Por qué es menos densa que la Tierra?", "Solo tiene un pequeño núcleo de hierro. La explicación más aceptada: hace unos 4500 millones de años, un cuerpo del tamaño de Marte chocó con la joven Tierra, y la Luna se formó con los restos, que procedían sobre todo de las capas rocosas exteriores. Mercurio es el caso contrario: pequeño y con un núcleo de hierro enorme."],
+      ["¿Por qué vemos siempre la misma cara?", "La gravedad de la Tierra estiró ligeramente a la joven Luna y, por fricción, frenó su giro hasta que una rotación duró exactamente lo mismo que una órbita. Se llama acoplamiento de marea. Nadie vio la cara oculta hasta que una sonda la fotografió en 1959."]
+    ],
+    stand: "La gravedad es la sexta parte de la terrestre: un salto de 50 cm se convierte en unos 3 m. El cielo es negro incluso a mediodía y, desde la cara visible, la Tierra cuelga casi inmóvil en el cielo, sin salir ni ponerse nunca, y se ve unas 3,7 veces más ancha que la Luna llena vista desde casa.",
+    tableSurface: "Roca y polvo",
+    tableGases: "Casi vacío (helio, neón, argón)"
   },
   mars: {
     name: "Marte", kind: "Planeta rocoso",
@@ -285,6 +312,7 @@ fun: {
   mercury: "Un día en Mercurio, de un amanecer al siguiente, dura 176 días terrestres, el doble de su año de 88 días. Esperar allí desde el amanecer hasta el atardecer lleva un año entero.",
   venus: "En Venus el Sol sale por el oeste. Gira en sentido contrario a la Tierra, y tan despacio que una vuelta tarda 243 días, más que los 225 días que tarda en dar la vuelta al Sol.",
   earth: "La Tierra es el más denso de los ocho planetas: 5,5 toneladas por metro cúbico de media. Casi todo el oxígeno que respiras lo fabricó la vida, poco a poco, a lo largo de miles de millones de años.",
+  moon: "Las huellas del Apolo probablemente siguen ahí. Sin viento ni lluvia, lo único que las borra poco a poco es una suave llovizna de diminutos meteoritos, algo que podría tardar millones de años.",
   mars: "En Marte los atardeceres son azules, mientras que el cielo de día es pardo amarillento. Las dos cosas tienen la misma causa: el polvo fino que flota en el aire.",
   jupiter: "La Gran Mancha Roja de Júpiter es una sola tormenta más ancha que toda la Tierra. La observamos con telescopios desde hace al menos 150 años, y todavía no ha parado.",
   saturn: "Los anillos de Saturno abarcan más de 200 000 km, pero en su mayor parte solo tienen unos 10 metros de grosor. En esa proporción, son como una hoja de papel de impresora de dos o tres kilómetros de ancho.",
@@ -301,6 +329,11 @@ photos: {
   ],
   earth: [
     {t: "“La canica azul”, 7 de diciembre de 1972", d: "Los astronautas del Apolo 17 fotografiaron la Tierra camino de la Luna: arriba, África y la península arábiga; abajo, en blanco, la Antártida.", b: "Color real"}
+  ],
+  moon: [
+    {t: "Una huella de bota en la Luna, 20 de julio de 1969", d: "Fotografiada durante el paseo lunar del Apolo 11 en el mar de la Tranquilidad. Los granos de polvo, irregulares, encajan entre sí y conservan una huella nítida. Sin viento ni agua que la difuminen, una huella así puede seguir intacta durante millones de años.", b: "Foto de superficie"},
+    {t: "«Salida de la Tierra», 24 de diciembre de 1968", d: "La tripulación del Apolo 8, los primeros humanos en orbitar la Luna, fotografió la Tierra asomando sobre el horizonte lunar. Desde el suelo de la cara visible, la Tierra no sale así: permanece casi fija en el cielo. Esta vista solo se tiene desde la órbita.", b: "Desde la órbita lunar"},
+    {t: "La Luna desde Orión, 6 de abril de 2026", d: "Tomada durante el vuelo de Artemis II alrededor de la Luna. Las oscuras llanuras de lava de arriba pertenecen a la cara visible desde la Tierra. La cuenca con anillos de debajo es Orientale, de casi 1000 km de ancho, y todo lo que queda por debajo es la cara oculta, que nunca mira a la Tierra.", b: "Desde la nave Orión"}
   ],
   mars: [
     {t: "La primera panorámica de 360° de Perseverance, febrero de 2021", d: "Tomada en el fondo del cráter Jezero y compuesta por 142 imágenes. Arrastra para dar la vuelta completa: la cresta lejana es el borde del cráter y, en primer plano, está la cubierta del propio rover.", b: "Foto de superficie"},

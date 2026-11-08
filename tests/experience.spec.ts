@@ -82,12 +82,12 @@ test('all ten locales fit and deep-link refresh works', async ({ page }) => {
   await expect(page.locator('#language')).toHaveValue('ar');
 });
 
-test('overview keeps 8 planets, 10 languages, photos and keyboard focus without loading Three.js', async ({ page }) => {
+test('overview keeps 8 planets and the Moon, 10 languages, photos and keyboard focus without loading Three.js', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', req => requests.push(req.url()));
   await page.goto('?lang=en#mars');
-  await expect(page.locator('.pbtn')).toHaveCount(8);
-  const ids = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
+  await expect(page.locator('.pbtn')).toHaveCount(9);
+  const ids = ['mercury', 'venus', 'earth', 'moon', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
   for (const locale of locales) {
     await page.locator('#lang').selectOption(locale);
     for (const id of ids) {

@@ -3,8 +3,8 @@ meta: {name: "English", html: "en", dir: "ltr", font: "latin", num: "en-US", lab
 ui: {
   title: "Standing on Other Worlds",
   langLabel: "Language",
-  stripLabel: "Choose a planet",
-  scaleNote: "Tap any planet to switch. Ordered outward from the Sun. Sizes are compressed (square root of diameter): at true scale, Jupiter is about 11 times wider than Earth.",
+  stripLabel: "Choose a world",
+  scaleNote: "Tap any world to switch. Ordered outward from the Sun, with the Moon beside Earth, the planet it orbits. Sizes are compressed (square root of diameter): at true scale, Jupiter is about 11 times wider than Earth.",
   photosOf: "Photos of {name}",
   panoHint: "← Drag to look around →",
   panoLabel: "Panorama, scroll sideways",
@@ -19,6 +19,7 @@ ui: {
   statDensityNote: "kg/m³ (water is 1,000)",
   statDay: "Day",
   statYear: "Year",
+  statOrbit: "Orbit around Earth",
   moonsOne: "{n} moon",
   moonsOther: "{n} moons",
   magYes: "global magnetic field",
@@ -39,9 +40,9 @@ ui: {
   gJump: "A 50 cm jump on Earth becomes",
   gWeight: "Your weight",
   gCloud: "(At the 1-bar cloud level, assuming you had somewhere to stand.)",
-  cmpTitle: "All eight side by side",
-  cmpSub: "Click any row to switch to that planet. Giant planets have no ground, so their gravity and temperature are given at the 1-bar level.",
-  colPlanet: "Planet",
+  cmpTitle: "The eight planets and the Moon, side by side",
+  cmpSub: "Click any row to switch to that world. Giant planets have no ground, so their gravity and temperature are given at the 1-bar level.",
+  colPlanet: "World",
   colType: "Type",
   colGround: "Underfoot",
   colGases: "Main gases",
@@ -68,7 +69,7 @@ ui: {
   frostAria: "Frost line diagram: rocky planets inside the frost line, gas giants and ice giants outside it",
   l2Title: "2. Who gets to keep an atmosphere?",
   l2p1: "Gas molecules are always zipping around: the hotter the gas and the lighter the molecule, the faster they move. At the same temperature, hydrogen molecules move 4.7 times faster than carbon dioxide.",
-  l2p2: "A rule of thumb: if a planet's escape velocity is more than about 6 times a molecule's average speed, the planet can hold on to that gas for billions of years. Drag the temperature to see which gases each planet can keep.",
+  l2p2: "A rule of thumb: if a world's escape velocity is more than about 6 times a molecule's average speed, it can hold on to that gas for billions of years. Drag the temperature to see which gases each world can keep.",
   tempLabel: "Upper-atmosphere temperature",
   tempOut: "{t} K (about {c} °C)",
   escAxis: "Planet escape velocity (km/s, log scale) · colored lines = minimum escape velocity to keep that gas",
@@ -77,7 +78,7 @@ ui: {
   keepSome: "Keeps {list}",
   legend: "At {t} K, the escape velocity needed to keep each gas: {list} km/s. A dot to the right of a line keeps that gas.",
   dotTitle: "{name}: escape velocity {v} km/s",
-  escAria: "Each planet's escape velocity compared with the speed needed to keep different gases",
+  escAria: "Each world's escape velocity compared with the speed needed to keep different gases",
   l2fine: "The temperature here means the very top of the atmosphere, where gas actually escapes into space, and it is often much hotter than the ground: Earth's upper atmosphere can reach about 1,000 K. This is a simplified model. The solar wind and chemical reactions also remove air, as Mars shows.",
   srcTitle: "Sources",
   sources: [
@@ -85,7 +86,8 @@ ui: {
     "Atmospheric composition: NASA NSSDC per-planet fact sheets, see the <a href=\"https://nssdc.gsfc.nasa.gov/planetary/planetfact.html\">fact sheet index</a>",
     "True colors of Neptune and Uranus: <a href=\"https://skyatnightmagazine.com/news/images-uranus-neptune-true-colours\">coverage of Irwin et al., 2024</a>",
     "Photos: NASA <a href=\"https://science.nasa.gov/photojournal/\">Photojournal</a>, NASA NSSDC (Venera 13), NASA Scientific Visualization Studio (Blue Marble). Each photo's source and ID appear below it. NASA images are used under NASA's media guidelines; the Juno close-up's processing is CC BY-NC-SA.",
-    "Surface materials and the “why” explanations summarize published results from MESSENGER, Venera, Viking, MAVEN, Juno and other missions, simplified."
+    "Surface materials and the “why” explanations summarize published results from MESSENGER, Venera, Viking, MAVEN, Juno and other missions, simplified.",
+    "The Moon: <a href=\"https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html\">NASA NSSDC Moon Fact Sheet</a>. Moon photos (Apollo 11, Apollo 8, Artemis II) come from the <a href=\"https://images.nasa.gov/\">NASA Image and Video Library</a>."
   ]
 },
 planets: {
@@ -159,6 +161,31 @@ planets: {
     ],
     stand: "This is the reference point your body is built for: every “times Earth” on this site counts Earth as 1.",
     tableSurface: "Rock + oceans"
+  },
+  moon: {
+    name: "Moon", kind: "Earth's moon",
+    tNote: "At the equator: about −178 °C at night to +117 °C at midday",
+    pNote: "About 3×10⁻¹⁵ bar at night, essentially a vacuum",
+    day: "29.5 Earth days", dayNote: "From one sunrise to the next", year: "27.3 days",
+    hook: "The only other world people have walked on: twelve astronauts between 1969 and 1972.",
+    surface: "Solid rock, covered in dust",
+    groundQ: "Gray dust and rock, battered by billions of years of impacts: dark lava plains and bright, cratered highlands.",
+    items: [
+      ["Regolith", "Powdery dust and broken rock several meters deep, ground up by meteorite impacts. The grains stay sharp-edged, because no wind or water rounds them off"],
+      ["Basalt", "The dark patches, called maria (Latin for “seas”), are ancient lava plains, the same kind of rock as Hawaii's"],
+      ["Anorthosite", "The bright highlands are a pale, feldspar-rich rock that floated to the top of an early ocean of molten rock"],
+      ["Water ice", "Hidden in polar craters that never see sunlight, some of the coldest places measured in the solar system"]
+    ],
+    airQ: "Almost no air: a whisper of helium, neon, hydrogen and argon.",
+    airNote: "All the Moon's air put together weighs only about 25 tonnes, roughly four elephants spread over a whole world. Much of it comes from the solar wind, and argon slowly seeps out of the rocks.",
+    why: [
+      ["Why is there no air?", "The Moon's escape velocity is only 2.4 km/s, and its sunlit ground gets hotter than boiling water, so gas molecules escape easily. Any air it once had leaked away into space long ago."],
+      ["Why is it less dense than Earth?", "It has only a small iron core. The leading explanation: about 4.5 billion years ago a Mars-sized body hit the young Earth, and the Moon formed from the debris, which came mostly from rocky outer layers. Mercury is the opposite case: small, with an oversized iron core."],
+      ["Why do we always see the same side?", "Earth's gravity slightly stretched the young Moon and, through friction, slowed its spin until one rotation took exactly as long as one orbit. This is called tidal locking. No one saw the far side until a spacecraft photographed it in 1959."]
+    ],
+    stand: "Gravity is one-sixth of Earth's: a 50 cm jump becomes about 3 m. The sky is black even at noon, and from the near side Earth hangs almost still in the sky, never rising or setting, and looks about 3.7 times wider than the full Moon does from home.",
+    tableSurface: "Rock and dust",
+    tableGases: "Near vacuum (helium, neon, argon)"
   },
   mars: {
     name: "Mars", kind: "Rocky planet",
@@ -285,6 +312,7 @@ fun: {
   mercury: "One day on Mercury, from sunrise to the next sunrise, lasts 176 Earth days, twice its 88-day year. Waiting there from sunrise to sunset takes a whole year.",
   venus: "On Venus the Sun rises in the west. It spins the opposite way from Earth, and so slowly that one turn takes 243 days, longer than its 225-day trip around the Sun.",
   earth: "Earth is the densest of the eight planets, averaging 5.5 tonnes per cubic meter. Nearly all the oxygen you are breathing was made, bit by bit, by life over billions of years.",
+  moon: "The Apollo footprints are probably still there. With no wind or rain, the only thing slowly erasing them is a gentle drizzle of tiny meteorites, which could take millions of years.",
   mars: "Sunsets on Mars are blue, while the daytime sky is yellow-brown. Both come from the same thing: fine dust floating in the air.",
   jupiter: "Jupiter's Great Red Spot is a single storm wider than the whole Earth. People have watched it through telescopes for at least 150 years, and it still hasn't stopped.",
   saturn: "Saturn's rings span more than 200,000 km, yet most of them are only about 10 meters thick. At that ratio, they are like a sheet of printer paper two or three kilometers wide.",
@@ -301,6 +329,11 @@ photos: {
   ],
   earth: [
     {t: "“The Blue Marble”, December 7, 1972", d: "Apollo 17 astronauts photographed Earth on their way to the Moon: Africa and the Arabian Peninsula at the top, Antarctica in white at the bottom.", b: "True color"}
+  ],
+  moon: [
+    {t: "A bootprint on the Moon, July 20, 1969", d: "Photographed during Apollo 11's moonwalk in the Sea of Tranquility. The jagged dust grains lock together and hold a crisp print. With no wind or water to blur it, a print like this can stay sharp for millions of years.", b: "Surface photo"},
+    {t: "“Earthrise”, December 24, 1968", d: "The Apollo 8 crew, the first people to orbit the Moon, photographed Earth rising over its horizon. From the ground on the near side, Earth would not rise like this: it stays almost fixed in the sky. Earthrise is a view you get from orbit.", b: "From lunar orbit"},
+    {t: "The Moon from Orion, April 6, 2026", d: "Taken during the Artemis II flight around the Moon. The dark lava plains at the top belong to the near side we see from Earth. The ringed basin below them is Orientale, nearly 1,000 km wide, and everything beneath it is the far side, which never faces Earth.", b: "From the Orion spacecraft"}
   ],
   mars: [
     {t: "Perseverance's first 360° panorama, February 2021", d: "Taken on the floor of Jezero Crater and stitched from 142 images. Drag to look all the way around: the distant ridge is the crater rim, and the foreground is the rover's own deck.", b: "Surface photo"},

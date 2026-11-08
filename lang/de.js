@@ -3,8 +3,8 @@ meta: {name: "Deutsch", html: "de", dir: "ltr", font: "latin", num: "de-DE", lab
 ui: {
   title: "Auf fremden Welten stehen",
   langLabel: "Sprache",
-  stripLabel: "Planeten wählen",
-  scaleNote: "Tippe auf einen Planeten, um zu wechseln. Von der Sonne nach außen sortiert. Größen gestaucht (Quadratwurzel des Durchmessers): maßstabsgetreu wäre Jupiter etwa 11-mal so breit wie die Erde.",
+  stripLabel: "Welt wählen",
+  scaleNote: "Tippe auf eine Welt, um zu wechseln. Von der Sonne nach außen sortiert, der Mond neben der Erde, die er umkreist. Größen gestaucht (Quadratwurzel des Durchmessers): maßstabsgetreu wäre Jupiter etwa 11-mal so breit wie die Erde.",
   photosOf: "Fotos von {name}",
   panoHint: "← Ziehen, um dich umzusehen →",
   panoLabel: "Panorama, seitlich scrollen",
@@ -19,6 +19,7 @@ ui: {
   statDensityNote: "kg/m³ (Wasser: 1000)",
   statDay: "Tag",
   statYear: "Jahr",
+  statOrbit: "Umlauf um die Erde",
   moonsOne: "{n} Mond",
   moonsOther: "{n} Monde",
   magYes: "globales Magnetfeld",
@@ -39,9 +40,9 @@ ui: {
   gJump: "Aus 50 cm Sprunghöhe auf der Erde werden",
   gWeight: "Dein Gewicht",
   gCloud: "(Auf Höhe der 1-bar-Wolkenschicht, falls du dort irgendwo stehen könntest.)",
-  cmpTitle: "Alle acht im Vergleich",
-  cmpSub: "Klicke auf eine Zeile, um zu diesem Planeten zu wechseln. Riesenplaneten haben keinen Boden, deshalb sind Schwerkraft und Temperatur auf der 1-bar-Höhe angegeben.",
-  colPlanet: "Planet",
+  cmpTitle: "Die acht Planeten und der Mond im Vergleich",
+  cmpSub: "Klicke auf eine Zeile, um zu dieser Welt zu wechseln. Riesenplaneten haben keinen Boden, deshalb sind Schwerkraft und Temperatur auf der 1-bar-Höhe angegeben.",
+  colPlanet: "Welt",
   colType: "Typ",
   colGround: "Unter den Füßen",
   colGases: "Hauptgase",
@@ -68,7 +69,7 @@ ui: {
   frostAria: "Schema der Schneegrenze: Gesteinsplaneten innerhalb, Gas- und Eisriesen außerhalb",
   l2Title: "2. Wer behält seine Atmosphäre?",
   l2p1: "Gasmoleküle flitzen ständig umher: Je heißer das Gas und je leichter das Molekül, desto schneller sind sie. Bei gleicher Temperatur sind Wasserstoffmoleküle 4,7-mal so schnell wie Kohlendioxid.",
-  l2p2: "Eine Faustregel: Ist die Fluchtgeschwindigkeit eines Planeten mehr als etwa 6-mal so groß wie die mittlere Geschwindigkeit eines Moleküls, kann der Planet dieses Gas Milliarden Jahre lang halten. Verschiebe die Temperatur und sieh, welche Gase jeder Planet behält.",
+  l2p2: "Eine Faustregel: Ist die Fluchtgeschwindigkeit einer Welt mehr als etwa 6-mal so groß wie die mittlere Geschwindigkeit eines Moleküls, kann sie dieses Gas Milliarden Jahre lang halten. Verschiebe die Temperatur und sieh, welche Gase jede Welt behält.",
   tempLabel: "Temperatur der oberen Atmosphäre",
   tempOut: "{t} K (etwa {c} °C)",
   escAxis: "Fluchtgeschwindigkeit (km/s, log. Skala) · farbige Linien = Minimum, um dieses Gas zu halten",
@@ -77,7 +78,7 @@ ui: {
   keepSome: "Behält {list}",
   legend: "Bei {t} K nötige Fluchtgeschwindigkeit, um jedes Gas zu halten: {list} km/s. Ein Punkt rechts einer Linie hält dieses Gas.",
   dotTitle: "{name}: Fluchtgeschwindigkeit {v} km/s",
-  escAria: "Fluchtgeschwindigkeit jedes Planeten im Vergleich mit der Geschwindigkeit, die zum Halten verschiedener Gase nötig ist",
+  escAria: "Fluchtgeschwindigkeit jeder Welt im Vergleich mit der Geschwindigkeit, die zum Halten verschiedener Gase nötig ist",
   l2fine: "Gemeint ist die Temperatur ganz oben in der Atmosphäre, wo Gas tatsächlich ins All entweicht. Sie ist oft viel höher als am Boden: Die obere Erdatmosphäre kann rund 1000 K erreichen. Das ist ein vereinfachtes Modell. Auch Sonnenwind und chemische Reaktionen tragen Luft ab, wie Mars zeigt.",
   srcTitle: "Quellen",
   sources: [
@@ -85,7 +86,8 @@ ui: {
     "Zusammensetzung der Atmosphären: NASA-NSSDC-Datenblätter der einzelnen Planeten, siehe <a href=\"https://nssdc.gsfc.nasa.gov/planetary/planetfact.html\">Übersicht der Datenblätter</a>",
     "Echte Farben von Neptun und Uranus: <a href=\"https://skyatnightmagazine.com/news/images-uranus-neptune-true-colours\">Bericht über Irwin et al., 2024</a>",
     "Fotos: NASA <a href=\"https://science.nasa.gov/photojournal/\">Photojournal</a>, NASA NSSDC (Venera 13), NASA Scientific Visualization Studio (Blue Marble). Quelle und Kennung stehen unter jedem Foto. NASA-Bilder werden gemäß den NASA-Nutzungsrichtlinien verwendet; die Bearbeitung der Juno-Nahaufnahme steht unter CC BY-NC-SA.",
-    "Oberflächenmaterialien und die „Warum“-Erklärungen fassen veröffentlichte Ergebnisse von MESSENGER, Venera, Viking, MAVEN, Juno und anderen Missionen vereinfacht zusammen."
+    "Oberflächenmaterialien und die „Warum“-Erklärungen fassen veröffentlichte Ergebnisse von MESSENGER, Venera, Viking, MAVEN, Juno und anderen Missionen vereinfacht zusammen.",
+    "Der Mond: <a href=\"https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html\">NASA NSSDC Moon Fact Sheet</a>. Die Mondfotos (Apollo 11, Apollo 8, Artemis II) stammen aus der <a href=\"https://images.nasa.gov/\">NASA Image and Video Library</a>."
   ]
 },
 planets: {
@@ -159,6 +161,31 @@ planets: {
     ],
     stand: "Das ist der Bezugspunkt, für den dein Körper gemacht ist: Jedes „mal die Erde“ auf dieser Seite setzt die Erde gleich 1.",
     tableSurface: "Gestein + Ozeane"
+  },
+  moon: {
+    name: "Mond", kind: "Erdmond",
+    tNote: "Am Äquator: nachts etwa −178 °C, mittags bis zu +117 °C",
+    pNote: "Nachts etwa 3×10⁻¹⁵ bar, praktisch ein Vakuum",
+    day: "29,5 Erdtage", dayNote: "Von einem Sonnenaufgang zum nächsten", year: "27,3 Tage",
+    hook: "Die einzige andere Welt, auf der Menschen gegangen sind: zwölf Astronauten zwischen 1969 und 1972.",
+    surface: "Fester Fels, von Staub bedeckt",
+    groundQ: "Grauer Staub und Fels, seit Milliarden Jahren von Einschlägen zertrümmert: dunkle Lavaebenen und helle, kraterübersäte Hochländer.",
+    items: [
+      ["Regolith", "Mehrere Meter pulvriger Staub und zerbrochenes Gestein, von Meteoriteneinschlägen zermahlen. Die Körner bleiben scharfkantig, weil kein Wind und kein Wasser sie abschleifen"],
+      ["Basalt", "Die dunklen Flecken, Maria genannt (lateinisch für „Meere“), sind uralte Lavaebenen, dasselbe Gestein wie auf Hawaii"],
+      ["Anorthosit", "Die hellen Hochländer bestehen aus einem blassen, feldspatreichen Gestein, das an der Oberfläche eines frühen Ozeans aus geschmolzenem Gestein aufschwamm"],
+      ["Wassereis", "Verborgen in Polkratern, in die nie Sonnenlicht fällt, einigen der kältesten gemessenen Orte im Sonnensystem"]
+    ],
+    airQ: "Fast keine Luft: nur ein Hauch von Helium, Neon, Wasserstoff und Argon.",
+    airNote: "Die gesamte Luft des Mondes wiegt nur etwa 25 Tonnen, ungefähr so viel wie vier Elefanten, verteilt über eine ganze Welt. Vieles davon bringt der Sonnenwind, und Argon sickert langsam aus dem Gestein.",
+    why: [
+      ["Warum gibt es keine Luft?", "Die Fluchtgeschwindigkeit des Mondes beträgt nur 2,4 km/s, und sein sonnenbeschienener Boden wird heißer als kochendes Wasser. So entweichen Gasmoleküle leicht. Jede Luft, die er einmal hatte, ist längst ins All entwichen."],
+      ["Warum ist er weniger dicht als die Erde?", "Er hat nur einen kleinen Eisenkern. Die gängigste Erklärung: Vor etwa 4,5 Milliarden Jahren prallte ein Körper von der Größe des Mars auf die junge Erde, und der Mond bildete sich aus den Trümmern, die vor allem aus felsigen äußeren Schichten stammten. Merkur ist der umgekehrte Fall: klein, mit einem übergroßen Eisenkern."],
+      ["Warum sehen wir immer dieselbe Seite?", "Die Schwerkraft der Erde hat den jungen Mond leicht gestreckt und seine Drehung durch Reibung gebremst, bis eine Umdrehung genau so lange dauerte wie ein Umlauf. Das nennt man gebundene Rotation. Die Rückseite sah niemand, bis eine Raumsonde sie 1959 fotografierte."]
+    ],
+    stand: "Die Schwerkraft beträgt ein Sechstel der irdischen: Aus einem 50-cm-Sprung werden etwa 3 m. Der Himmel ist selbst mittags schwarz, und von der Vorderseite aus hängt die Erde fast reglos am Himmel, geht nie auf oder unter und wirkt etwa 3,7-mal so breit wie der Vollmond von zu Hause aus.",
+    tableSurface: "Fels und Staub",
+    tableGases: "Fast Vakuum (Helium, Neon, Argon)"
   },
   mars: {
     name: "Mars", kind: "Gesteinsplanet",
@@ -285,6 +312,7 @@ fun: {
   mercury: "Ein Tag auf Merkur, von einem Sonnenaufgang zum nächsten, dauert 176 Erdtage, doppelt so lang wie sein 88-Tage-Jahr. Wer dort vom Sonnenaufgang bis zum Sonnenuntergang wartet, wartet ein ganzes Jahr.",
   venus: "Auf der Venus geht die Sonne im Westen auf. Sie dreht sich andersherum als die Erde und so langsam, dass eine Umdrehung 243 Tage dauert, länger als ihr 225-tägiger Weg um die Sonne.",
   earth: "Die Erde ist der dichteste der acht Planeten, im Schnitt 5,5 Tonnen pro Kubikmeter. Fast der gesamte Sauerstoff, den du gerade atmest, wurde über Milliarden Jahre Stück für Stück vom Leben erzeugt.",
+  moon: "Die Fußabdrücke von Apollo sind wahrscheinlich noch da. Ohne Wind und Regen verwischt sie nur ein sanfter Niesel winziger Meteoriten, und das kann Millionen Jahre dauern.",
   mars: "Auf dem Mars sind Sonnenuntergänge blau, der Taghimmel dagegen gelbbraun. Beides hat dieselbe Ursache: feinen Staub, der in der Luft schwebt.",
   jupiter: "Jupiters Großer Roter Fleck ist ein einziger Sturm, der breiter ist als die ganze Erde. Wir beobachten ihn seit mindestens 150 Jahren durchs Teleskop, und er hat noch immer nicht aufgehört.",
   saturn: "Saturns Ringe spannen sich über mehr als 200 000 km, sind aber meist nur etwa 10 Meter dick. In diesem Verhältnis wären sie ein Blatt Druckerpapier, zwei bis drei Kilometer breit.",
@@ -301,6 +329,11 @@ photos: {
   ],
   earth: [
     {t: "„Blue Marble“, 7. Dezember 1972", d: "Die Astronauten von Apollo 17 fotografierten die Erde auf dem Weg zum Mond: oben Afrika und die Arabische Halbinsel, unten weiß die Antarktis.", b: "Echte Farben"}
+  ],
+  moon: [
+    {t: "Ein Stiefelabdruck auf dem Mond, 20. Juli 1969", d: "Aufgenommen beim Mondspaziergang von Apollo 11 im Meer der Ruhe. Die zackigen Staubkörner verhaken sich und halten einen scharfen Abdruck. Ohne Wind oder Wasser, die ihn verwischen, kann ein solcher Abdruck Millionen Jahre lang scharf bleiben.", b: "Oberflächenfoto"},
+    {t: "„Erdaufgang“, 24. Dezember 1968", d: "Die Besatzung von Apollo 8, die ersten Menschen in einer Mondumlaufbahn, fotografierte die Erde, wie sie über dem Mondhorizont aufgeht. Vom Boden der Vorderseite aus geht die Erde so nicht auf: Sie steht fast fest am Himmel. Diesen Anblick gibt es nur aus der Umlaufbahn.", b: "Aus der Mondumlaufbahn"},
+    {t: "Der Mond von Orion aus, 6. April 2026", d: "Aufgenommen beim Flug von Artemis II um den Mond. Die dunklen Lavaebenen oben gehören zur Vorderseite, die wir von der Erde aus sehen. Das Ringbecken darunter ist Orientale, fast 1000 km breit, und alles darunter ist die Rückseite, die der Erde nie zugewandt ist.", b: "Vom Raumschiff Orion"}
   ],
   mars: [
     {t: "Das erste 360°-Panorama von Perseverance, Februar 2021", d: "Aufgenommen am Boden des Jezero-Kraters, zusammengesetzt aus 142 Bildern. Ziehe, um dich einmal ganz umzusehen: Der ferne Grat ist der Kraterrand, im Vordergrund liegt das Deck des Rovers.", b: "Oberflächenfoto"},

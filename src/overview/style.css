@@ -57,6 +57,9 @@ html[dir="rtl"] .sun{border-radius:96px 0 0 96px;background:radial-gradient(circ
 .pname{font-size:14px;font-weight:500;line-height:1.25;text-align:center;padding-bottom:3px;border-bottom:2px solid transparent}
 .pname small{display:block;font-family:var(--mono);font-size:11px;color:var(--faint);font-weight:400}
 .pbtn[aria-pressed="true"]{color:var(--text)}
+/* The Moon sits beside Earth, slightly raised, as its companion rather than a ninth planet. */
+.pbtn.sat{margin-inline-start:calc(-1*clamp(6px,1.6vw,20px) + 2px);align-self:flex-start;margin-top:6px}
+.pbtn.sat .pname{font-size:.92em}
 .pbtn[aria-pressed="true"] .pname{border-bottom-color:var(--p)}
 .scale-note{font-size:12px;color:var(--faint);margin:2px 0 0}
 @media (prefers-reduced-motion:reduce){.pbtn svg{transition:none}}
