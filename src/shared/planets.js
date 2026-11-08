@@ -1,0 +1,33 @@
+export const PLANETS = [
+ {id:'mercury',color:'#8e8983',accent:'#c9c1b6',D:4879,g:3.7,vesc:4.3,density:5429,t:167,p:0,pd:0,moons:0,mag:true,
+  atoms:['Na','Mg','O','H','K','Ca']},
+ {id:'venus',color:'#e3cf9f',accent:'#ecd28e',D:12104,g:8.9,vesc:10.4,density:5243,t:464,p:92,pd:0,moons:0,mag:false,
+  gases:[['CO2',96.5],['N2',3.5]],minor:[['SO2','150 ppm'],['Ar','70 ppm'],['H2O','20 ppm'],['CO','17 ppm'],['He','12 ppm'],['Ne','7 ppm']]},
+ {id:'earth',color:'#2f63a8',accent:'#77a9f5',D:12756,g:9.8,vesc:11.2,density:5514,t:15,p:1.01,pd:2,moons:1,mag:true,
+  gases:[['N2',78.08],['O2',20.95],['Ar',0.934]],minor:[['CO2','420 ppm'],['Ne','18 ppm'],['He','5.2 ppm'],['CH4','1.9 ppm']]},
+ {id:'mars',color:'#c0643c',accent:'#ee8b5c',D:6792,g:3.7,vesc:5.0,density:3934,t:-65,p:0.006,pd:3,moons:2,mag:false,
+  gases:[['CO2',95.1],['N2',2.59],['Ar',1.94],['O2',0.16],['CO',0.06]],minor:[['H2O','210 ppm'],['NO','100 ppm'],['Ne','2.5 ppm']]},
+ {id:'jupiter',color:'#d6bf9c',accent:'#e8c18e',D:142984,g:23.1,vesc:59.5,density:1326,t:-110,p:null,moons:95,mag:true,
+  gases:[['H2',89.8],['He',10.2]],minor:[['CH4','3000 ppm'],['NH3','260 ppm'],['HD','28 ppm'],['C2H6','5.8 ppm'],['H2O','4 ppm']]},
+ {id:'saturn',color:'#e0cc9c',accent:'#ead190',D:120536,g:9.0,vesc:35.5,density:687,t:-140,p:null,moons:274,mag:true,
+  gases:[['H2',96.3],['He',3.25]],minor:[['CH4','4500 ppm'],['NH3','125 ppm'],['HD','110 ppm'],['C2H6','7 ppm']]},
+ {id:'uranus',color:'#b5dde0',accent:'#96e0e4',D:51118,g:8.7,vesc:21.3,density:1270,t:-195,p:null,moons:28,mag:true,
+  gases:[['H2',82.5],['He',15.2],['CH4',2.3]],minor:[['HD','148 ppm']]},
+ {id:'neptune',color:'#9fc3de',accent:'#88b8f0',D:49528,g:11.0,vesc:23.5,density:1638,t:-200,p:null,moons:16,mag:true,
+  gases:[['H2',80.0],['He',19.0],['CH4',1.5]],minor:[['HD','192 ppm'],['C2H6','1.5 ppm']]}
+];
+export const PHOTO_META = {
+ mercury:[{f:'mercury-globe.jpg',fit:'contain',bk:'warn',c:'NASA / JHUAPL / Carnegie Institution of Washington (PIA16850)'}],
+ venus:[{f:'venus-venera13.jpg',pano:true,start:.22,bk:'good',c:'Soviet Planetary Exploration Program / NASA NSSDC'},
+        {f:'venus-mariner10.jpg',fit:'contain',bk:'warn',c:'NASA / JPL-Caltech (PIA23791)'}],
+ earth:[{f:'earth-bluemarble.jpg',fit:'contain',bk:'good',c:'NASA (AS17-148-22727)'}],
+ mars:[{f:'mars-pano360.jpg',pano:true,start:.12,bk:'good',c:'NASA / JPL-Caltech / ASU / MSSS (PIA24264)'},
+       {f:'mars-sunset.jpg',fit:'cover',pos:'50% 62%',bk:'good',c:'NASA / JPL-Caltech / MSSS / Texas A&M Univ. (PIA19400)'},
+       {f:'mars-viking.jpg',fit:'contain',bk:'neutral',c:'NASA / JPL / USGS (PIA00003)'}],
+ jupiter:[{f:'jupiter-juno.jpg',fit:'cover',pos:'50% 45%',bk:'warn',c:'NASA / JPL-Caltech / SwRI / MSSS; processing: Gerald Eichstädt / Seán Doran, CC BY-NC-SA (PIA21973)'},
+          {f:'jupiter-cassini.jpg',fit:'contain',bk:'good',c:'NASA / JPL / Space Science Institute (PIA04866)'}],
+ saturn:[{f:'saturn-cassini.jpg',fit:'contain',bk:'good',c:'NASA / JPL / Space Science Institute (PIA06193)'},
+         {f:'saturn-backlit.jpg',fit:'cover',pos:'50% 50%',bk:'good',c:'NASA / JPL-Caltech / SSI (PIA17172)'}],
+ uranus:[{f:'uranus-voyager.jpg',fit:'contain',bk:'good',c:'NASA / JPL (PIA00143)'}],
+ neptune:[{f:'neptune-clouds.jpg',fit:'cover',pos:'50% 40%',bk:'good',c:'NASA / JPL (PIA00063)'}]
+};

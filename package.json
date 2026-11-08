@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@types/bun": "^1.4.4",
+    "@types/three": "^0.187.0",
+    "typescript": "^7.0.2",
+    "vite": "7"
+  },
+  "name": "standing-on-other-worlds",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --bun vite --host 127.0.0.1",
+    "build": "bun run typecheck && bun --bun vite build",
+    "preview": "bun --bun vite preview --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test tests/world.test.ts",
+    "test:e2e": "bun --bun playwright test"
+  }
+}
